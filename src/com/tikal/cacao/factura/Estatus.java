@@ -5,5 +5,5 @@ package com.tikal.cacao.factura;
  *
  */
 public enum Estatus {
-	GENERADO, TIMBRADO, CANCELADO
+	GENERADO, TIMBRADO, CANCELADO, PENDIENTE
 }

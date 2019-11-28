@@ -1001,12 +1001,12 @@ public class PDFFactura {
 
 	////	 agregarChunkYNuevaLinea("", font1, fraseDatosEmisor);
 		 agregarChunkYNuevaLinea("", font1, fraseDatosEmisor);
-		 agregarChunkYNuevaLinea("Construrama Casa San Lucas", font2, fraseDatosEmisor);
+		 agregarChunkYNuevaLinea("Sanatorio México", font2, fraseDatosEmisor);
 	//	 agregarChunkYNuevaLinea("R.F.C. ".concat(comprobante.getEmisor().getRfc()),font3, fraseDatosEmisor);
 	//	 agregarChunkYNuevaLinea(dom, font3, fraseDatosEmisor);
 		 agregarChunkYNuevaLinea("Tel: (722) 271 0404", font3, fraseDatosEmisor);
-		 agregarChunkYNuevaLinea("AV. SOLIDARIDAD LAS TORRES #800, SAN JERONIMO, METEPEC, MÉXICO, 52170", font3, fraseDatosEmisor);
-		 agregarChunkYNuevaLinea("construrama.sanlucas@gmail.com", font3, fraseDatosEmisor);
+		 agregarChunkYNuevaLinea("AV. MEXICO #800, COL AMERICAS,TOLUCA, MÉXICO, 52170", font3, fraseDatosEmisor);
+		 agregarChunkYNuevaLinea("sanamex@gmail.com", font3, fraseDatosEmisor);
 		
 		 celdaDatosEmisor.setMinimumHeight(45);
 		 celdaDatosEmisor.setPhrase(fraseDatosEmisor);
@@ -1022,12 +1022,12 @@ public class PDFFactura {
 		if(encabezado==1){
 		 if (estatus.equals(Estatus.TIMBRADO) ||
 		 estatus.equals(Estatus.CANCELADO)){
-		 lugarFechaEmiHoraCert = ("Metepec, México a ").concat(comprobante.getFecha().toString().concat(" / ").concat(tfd.getFechaTimbrado().toString()));
+		 lugarFechaEmiHoraCert = ("Toluca, México a ").concat(comprobante.getFecha().toString().concat(" / ").concat(tfd.getFechaTimbrado().toString()));
 		 }else if (estatus.equals(Estatus.GENERADO)|| estatus.equals(Estatus.VENDIDO)){
-		 lugarFechaEmiHoraCert = ("Metepec, México a  ").concat(comprobante.getFecha().toString());
+		 lugarFechaEmiHoraCert = ("Toluca, México a  ").concat(comprobante.getFecha().toString());
 		 }
 		}else{
-			lugarFechaEmiHoraCert = "Metepec, México a ".concat(comprobante.getFecha().toString());
+			lugarFechaEmiHoraCert = "Toluca, México a ".concat(comprobante.getFecha().toString());
 		}
 		 agregarChunkYNuevaLinea("", font1, fraseDatosEmisor);
 		agregarCeldaSinBorde(lugarFechaEmiHoraCert, font3, subTablaFecha, true);

@@ -40,6 +40,7 @@ import com.google.gson.annotations.SerializedName;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Image;
 import com.tikal.cacao.factura.FormatoFecha;
+import com.tikal.cacao.model.RegistroBitacora;
 import com.tikal.cacao.sat.cfd.Comprobante;
 import com.tikal.cacao.sat.cfd.TUbicacion;
 import com.tikal.cacao.sat.cfd.catalogos.C_Estado;
@@ -606,5 +607,66 @@ public class Util {
 			
 //		} // else {
 		return null;
+	}
+	
+	public static RegistroBitacora crearRegistroBitacora(HttpSession sesion, String tipo, String evento) {
+		RegistroBitacora registroBitacora = new RegistroBitacora();
+		registroBitacora.setUsuario((String) sesion.getAttribute("userName"));
+		registroBitacora.setTipo(tipo);
+		registroBitacora.setEvento(evento);
+		registroBitacora.setFecha(new Date());
+		return registroBitacora;
+	}
+	
+	public static byte[] getQR(String sello, String uuid, String rfcEmisor, String rfcReceptor, String total) {
+		String uri = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx&id=" + uuid;
+		uri += "&re=" + rfcEmisor;
+		uri += "&rr=" + rfcReceptor;
+		uri += "&tt=" + total;
+		String last5 = sello.substring(sello.length() - 5);
+		uri += "&fe=" + last5;
+//		return uri.getBytes();
+		return Util.generate(uri);
+	}
+	
+	public static Date xmlGregorianAFecha(XMLGregorianCalendar calendar, boolean off) {
+		if (calendar == null) {
+			return null;
+		}
+		GregorianCalendar gCalendar = calendar.toGregorianCalendar();
+		gCalendar.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
+		if (off) {
+
+			gCalendar.add(GregorianCalendar.HOUR_OF_DAY, -6);
+
+			// int horaDelDia = gCalendar.get(Calendar.HOUR_OF_DAY) - 1;
+			// if (horaDelDia < 0) { // CASO DE LA MEDIA NOCHE, DESPU�S DE LAS
+			// 00:00:00 HORAS
+			// gCalendar.set(Calendar.HOUR_OF_DAY, 23);
+			//
+			// int diaDelMes = gCalendar.get(Calendar.DAY_OF_MONTH) - 1 ;
+			// if (diaDelMes <= 0) {
+			// gCalendar.set(Calendar.DAY_OF_MONTH, 1);
+			//
+			// int mes = gCalendar.get(Calendar.MONTH) +1;
+			// if (mes < 0) {
+			// mes = 1;
+			// }
+			// gCalendar.set(Calendar.MONTH, mes);
+			//
+			// } else {
+			// gCalendar.set(Calendar.DAY_OF_MONTH, diaDelMes);
+			// }
+			//
+			// } else {
+			// gCalendar.set(Calendar.HOUR_OF_DAY, horaDelDia);
+			// }
+		}
+		// GregorianCalendar c = new GregorianCalendar(
+		// TimeZone.getTimeZone("America/Mexico_City") );
+		// Date dateMexico = c.getTime();
+		// System.out.println(dateMexico);
+		return gCalendar.getTime();
+
 	}
 }
